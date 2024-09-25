@@ -33,6 +33,26 @@ function createSlider(parent, min, max, value, step, onChange) {
     parent.appendChild(slider);
 }
 
+function createCheckbox(parent, text, onChange) {
+    const container = document.createElement("div");
+    container.classList.add("checkbox-container");
+
+    const label = document.createElement("label");
+    label.innerText = text;
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+
+    checkbox.onchange = function () {
+        onChange();
+        label.classList.toggle("checked");
+    }
+
+    label.appendChild(checkbox);
+    container.appendChild(label);
+    parent.appendChild(container);
+}
+
 
 function setHeaderContent(){
     const header = document.querySelector("header");

@@ -27,10 +27,19 @@ canvas{
 }
 
 .animation{
-    float: right;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.simulation .right{
+    float: right;
+    margin-left: 10px;
+}
+
+.simulation .left{
+    float: left;
+    margin-right: 10px;
 }
 
 header {
@@ -165,4 +174,51 @@ input[type="range"]::-webkit-slider-thumb {
 
 input[type="range"]::-webkit-slider-thumb:hover {
     background: #4a4949;
+}
+
+
+/*function createCheckbox(parent, text, onChange) {
+    const label = document.createElement("label");
+    label.innerText = text;
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.onchange = onChange;
+    label.appendChild(checkbox);
+    parent.appendChild(label);
+}*/
+
+/*Style die checkboxen und label*/
+
+.checkbox-container{
+    display: inline-block;
+}
+
+.checkbox-container label{
+    background: #d5d5d5;
+    border-radius: 5px;
+    display: inline-block;
+    border-bottom: 3px solid #2b2b2c;
+    padding: 10px 20px;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-bottom 0.1s cubic-bezier(0.4, 0, 0.2, 1), margin-bottom 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.checkbox-container label:hover{
+    background: #a5dabe;
+    color: white;
+}
+
+.checkbox-container input[type="checkbox"]{
+    display: none;
+}
+
+.checkbox-container label.checked{
+    background: #3db478;
+    color: white;
+}
+
+.checkbox-container label.checked:hover{
+    background: #238754;
+    color: white;
 }
