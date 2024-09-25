@@ -4,6 +4,22 @@
     font-family: 'Poppins', sans-serif;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b1b1b1
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #802a62;
+}
+
 canvas{
     border: 1px solid black;
     background: rgba(0, 0, 0, 0.05);

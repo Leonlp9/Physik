@@ -536,6 +536,10 @@ function createElectricPolarization(elementId, gleichnamig) {
     }
 }
 
+/**
+ * Erstellt eine Animation für die Elektronenbewegung in einem Atom
+ * @param elementId Id des Elements, in dem die Animation erstellt werden soll
+ */
 function createValenceElectrons(elementId) {
     const element = document.getElementById(elementId);
     const animation = document.createElement("div");
