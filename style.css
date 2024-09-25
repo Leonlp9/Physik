@@ -36,11 +36,13 @@ canvas{
 .simulation .right{
     float: right;
     margin-left: 10px;
+    margin-right: 10px;
 }
 
 .simulation .left{
     float: left;
     margin-right: 10px;
+    margin-left: 10px;
 }
 
 header {
@@ -222,4 +224,44 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .checkbox-container label.checked:hover{
     background: #238754;
     color: white;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.calculator label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+.calculator input[type="number"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.calculator button {
+    padding: 10px;
+    background-color: #3db478;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.calculator button:hover {
+    background-color: #238754;
+}
+
+.calculator #result {
+    margin-top: 10px;
+    font-weight: bold;
 }

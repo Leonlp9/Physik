@@ -28,8 +28,7 @@
         };
     </script>
     <!-- MathJax -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <link rel="stylesheet" href="../style.css">
     <script src="../global.js"></script>
@@ -73,7 +72,19 @@
                     <p>Die gleichförmige Bewegung ist eine Bewegung, bei der sich ein Körper mit konstanter Geschwindigkeit in eine Richtung bewegt. Dies bedeutet, dass der Körper in gleichen Zeitabständen gleiche Strecken zurücklegt. Ein Beispiel für eine gleichförmige Bewegung ist ein Auto, das mit einer konstanten Geschwindigkeit auf einer geraden Straße fährt. In der Physik wird die gleichförmige Bewegung oft durch die Formel \(s = v \cdot t\) beschrieben, wobei \(s\) die zurückgelegte Strecke, \(v\) die konstante Geschwindigkeit und \(t\) die Zeit ist.</p>
                 </div>
                 <div id="gleichfoermigeBewegungSimulation"></div>
-                <script>createGleichfoermigeBewegung("gleichfoermigeBewegungSimulation")</script>
+                <div id="gleichfoermigeBewegungCalculator"></div>
+                <script>
+                    createGleichfoermigeBewegung("gleichfoermigeBewegungSimulation")
+
+                    function calculateS({ v, t }) {
+                        return v * t;
+                    }
+
+                    createCalculator('gleichfoermigeBewegungCalculator', calculateS, 's = v \\cdot t', [
+                        { id: 'v', label: 'v (Geschwindigkeit in m/s)' },
+                        { id: 't', label: 't (Zeit in s)' }
+                    ]);
+                </script>
             </div>
 
             <!-- Beschleunigte Bewegung - nicht gleichförmig -->
@@ -83,7 +94,19 @@
                     <p>Die beschleunigte Bewegung ist eine Bewegung, bei der sich die Geschwindigkeit eines Körpers ändert. Dies kann entweder eine Zunahme oder eine Abnahme der Geschwindigkeit sein. Ein Beispiel für eine beschleunigte Bewegung ist ein Auto, das von einer Ampel anfährt und dabei immer schneller wird. In der Physik wird die beschleunigte Bewegung oft durch die Formel \(a = \frac{\Delta v}{\Delta t}\) beschrieben, wobei \(a\) die Beschleunigung, \(\Delta v\) die Geschwindigkeitsänderung und \(\Delta t\) die Zeit ist, in der die Änderung stattfindet. Beschleunigte Bewegungen können auch durch Kräfte verursacht werden, wie zum Beispiel die Schwerkraft, die einen fallenden Apfel beschleunigt.</p>
                 </div>
                 <div id="beschleunigteBewegungSimulation"></div>
-                <script>createBeschleunigteBewegung("beschleunigteBewegungSimulation")</script>
+                <div id="beschleunigteBewegungCalculator"></div>
+                <script>
+                    createBeschleunigteBewegung("beschleunigteBewegungSimulation")
+
+                    function calculateA({ deltaV, deltaT }) {
+                        return deltaV / deltaT;
+                    }
+
+                    createCalculator('beschleunigteBewegungCalculator', calculateA, 'a = \\frac{\\Delta v}{\\Delta t}', [
+                        { id: 'deltaV', label: 'Delta v (Geschwindigkeitsänderung in m/s)' },
+                        { id: 'deltaT', label: 'Delta t (Zeit in s)' }
+                    ]);
+                </script>
             </div>
         </div>
     </div>

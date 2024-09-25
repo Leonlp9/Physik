@@ -53,6 +53,45 @@ function createCheckbox(parent, text, onChange) {
     parent.appendChild(container);
 }
 
+function createCalculator(containerId, formula, formulaText, inputs) {
+    const container = document.getElementById(containerId);
+    const form = document.createElement('form');
+    form.className = 'calculator';
+
+    inputs.forEach(input => {
+        const label = document.createElement('label');
+        label.textContent = `${input.label}: `;
+        const inputField = document.createElement('input');
+        inputField.type = 'number';
+        inputField.id = input.id + containerId;
+        inputField.value = input.defaultValue || '';
+        label.appendChild(inputField);
+        form.appendChild(label);
+        form.appendChild(document.createElement('br'));
+    });
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = 'Calculate';
+    button.onclick = () => {
+        const values = inputs.reduce((acc, input) => {
+            acc[input.id] = parseFloat(document.getElementById(input.id + containerId).value);
+            return acc;
+        }, {});
+        const result = formula(values);
+        const substitutedFormula = formulaText;
+        const resultContainer = document.getElementById('result' + containerId);
+        resultContainer.innerHTML = `Result: \\(${substitutedFormula} = ${result}\\)`;
+        MathJax.typesetPromise([resultContainer]);
+    };
+    form.appendChild(button);
+
+    const resultContainer = document.createElement('div');
+    resultContainer.id = 'result' + containerId;
+    form.appendChild(resultContainer);
+
+    container.appendChild(form);
+}
 
 function setHeaderContent(){
     const header = document.querySelector("header");
