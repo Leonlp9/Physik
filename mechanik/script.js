@@ -59,7 +59,7 @@ function startAnimation(elementId, v, a, spuren) {
             //punkte zeichnen
             context.fillStyle = "black";
             for (let i = 0; i < positionen.length; i++) {
-                context.fillRect(positionen[i].x + 25, 50, 1, 1);
+                context.fillRect(positionen[i].x + 25, 50, 2, 2);
             }
         }
 
