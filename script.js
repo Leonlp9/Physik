@@ -332,6 +332,7 @@ function createMagneticField(elementId, type){
         movingElement = elements.find(element => {
             const dx = element.x - x;
             const dy = element.y - y;
+            canvas.style.cursor = "move";
             return dx * dx + dy * dy < element.radius * element.radius;
         });
     });
@@ -343,11 +344,30 @@ function createMagneticField(elementId, type){
             movingElement.y = event.clientY - rect.top;
         }
 
+        //wenn maus über einem element ist, dann cursor ändern zu pointer
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const element = elements.find(element => {
+            const dx = element.x - x;
+            const dy = element.y - y;
+            return dx * dx + dy * dy < element.radius * element.radius;
+        });
+
+        if (!movingElement) {
+            if (element) {
+                canvas.style.cursor = "pointer";
+            } else {
+                canvas.style.cursor = "default";
+            }
+        }
+
         frame();
     });
 
     canvas.addEventListener("mouseup", function() {
         movingElement = null;
+        canvas.style.cursor = "default";
     });
 
     function frame() {
