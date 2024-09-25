@@ -1,3 +1,13 @@
+/**
+ * Erstellt eine Animation für die Elektronenbewegung in einem Leiter
+ * @param canvas Canvas, in dem die Animation erstellt werden soll
+ * @param x X-Koordinate
+ * @param y Y-Koordinate
+ * @param radius Radius
+ * @param color Farbe
+ * @param text Text
+ * @param transparent true, wenn das Element transparent sein soll, sonst false
+ */
 function drawParticle(canvas, x, y, radius, color, text, transparent) {
     const ctx = canvas.getContext("2d");
     ctx.beginPath();
@@ -21,18 +31,52 @@ function drawParticle(canvas, x, y, radius, color, text, transparent) {
     ctx.fillText(text, x, y);
 }
 
+/**
+ * Zeichnet ein Neutron
+ * @param canvas Canvas, in dem das Neutron gezeichnet
+ * @param x X-Koordinate
+ * @param y Y-Koordinate
+ * @param radius Radius
+ * @param text Ob ein + oder - angezeigt werden soll
+ * @param transparent true, wenn das Neutron transparent sein soll, sonst false
+ */
 function drawNeutron(canvas, x, y, radius, text = true, transparent = true) {
     drawParticle(canvas, x, y, radius, "rgba(0, 255, 0, 0.5)", text ? "n" : "", transparent);
 }
 
+/**
+ * Zeichnet ein Elektron
+ * @param canvas Canvas, in dem das Elektron gezeichnet werden soll
+ * @param x X-Koordinate
+ * @param y Y-Koordinate
+ * @param radius Radius
+ * @param text Ob ein + oder - angezeigt werden soll
+ * @param transparent true, wenn das Elektron transparent sein soll, sonst false
+ */
 function drawElectron(canvas, x, y, radius, text = true, transparent = true) {
     drawParticle(canvas, x, y, radius, "rgba(0, 0, 255, 0.5)", text ? "-" : "", transparent);
 }
 
+/**
+ * Zeichnet ein Proton
+ * @param canvas Canvas, in dem das Proton gezeichnet werden soll
+ * @param x X-Koordinate
+ * @param y Y-Koordinate
+ * @param radius Radius
+ * @param text Ob ein + oder - angezeigt werden soll
+ * @param transparent true, wenn das Proton transparent sein soll, sonst false
+ */
 function drawProton(canvas, x, y, radius, text = true, transparent = true) {
     drawParticle(canvas, x, y, radius, "rgba(255, 0, 0, 0.5)", text ? "+" : "", transparent);
 }
 
+/**
+ * Zeichnet ein Atom mit einer Schale und einem Kern
+ * @param canvas Canvas, in dem das Atom gezeichnet werden soll
+ * @param x X-Koordinate
+ * @param y Y-Koordinate
+ * @param radius Radius der Schale
+ */
 function drawAtomShellWithNucleus(canvas, x, y, radius) {
     const ctx = canvas.getContext("2d");
 
@@ -47,6 +91,16 @@ function drawAtomShellWithNucleus(canvas, x, y, radius) {
     drawProton(canvas, x, y, radius / 3, false);
 }
 
+/**
+ * Zeichnet ein Element
+ * @param canvas Canvas, in dem das Element gezeichnet werden soll
+ * @param x X-Koordinate
+ * @param y Y-Koordinate
+ * @param width Breite
+ * @param height Höhe
+ * @param color Farbe
+ * @param text Text
+ */
 function drawElement(canvas, x, y, width, height, color, text) {
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = color;
@@ -59,6 +113,12 @@ function drawElement(canvas, x, y, width, height, color, text) {
     ctx.fillText(text, x + width / 2, y + height / 2);
 }
 
+/**
+ * Erstellt einen Button
+ * @param parent Element, in dem der Button erstellt werden soll
+ * @param text Text des Buttons
+ * @param onClick Funktion, die aufgerufen wird, wenn der Button geklickt wird
+ */
 function createButton(parent, text, onClick) {
     const button = document.createElement("button");
     button.innerText = text;
@@ -67,6 +127,15 @@ function createButton(parent, text, onClick) {
     parent.appendChild(button);
 }
 
+/**
+ * Erstellt einen Slider
+ * @param parent Element, in dem der Slider erstellt werden soll
+ * @param min Mindestwert
+ * @param max Maximalwert
+ * @param value Startwert
+ * @param step Schrittweite
+ * @param onChange Funktion, die aufgerufen wird, wenn sich der Wert ändert
+ */
 function createSlider(parent, min, max, value, step, onChange) {
     const slider = document.createElement("input");
     slider.type = "range";
@@ -78,6 +147,10 @@ function createSlider(parent, min, max, value, step, onChange) {
     parent.appendChild(slider);
 }
 
+/**
+ * Erstellt eine Animation für die Radiallinie
+ * @param elementId
+ */
 function createRadialLine(elementId){
     const element = document.getElementById(elementId);
     const animation = document.createElement("div");
@@ -131,6 +204,10 @@ function createRadialLine(elementId){
     frame();
 }
 
+/**
+ * Erstellt eine Animation für den Elektronenfluss in einem Leiter
+ * @param elementId
+ */
 function createElectronFlow(elementId){
     const element = document.getElementById(elementId);
     const animation = document.createElement("div");
@@ -213,6 +290,11 @@ function createElectronFlow(elementId){
 
 }
 
+/**
+ * Erstellt eine Animation für die Feldlinien eines Magnetfeldes
+ * @param elementId Id des Elements, in dem die Animation erstellt werden soll
+ * @param type 0 für ein Magnetfeld um ein bewegtes Element, 1 für ein Magnetfeld um zwei bewegte Elemente
+ */
 function createMagneticField(elementId, type){
     const element = document.getElementById(elementId);
     const animation = document.createElement("div");
@@ -380,6 +462,11 @@ function createMagneticField(elementId, type){
 
 }
 
+/**
+ * Erstellt eine Animation für die elektrische Polarisation
+ * @param elementId Id des Elements, in dem die Animation erstellt werden soll
+ * @param gleichnamig true, wenn die Elemente gleichnamig sind, sonst false
+ */
 function createElectricPolarization(elementId, gleichnamig) {
     const element = document.getElementById(elementId);
     const animation = document.createElement("div");
@@ -421,7 +508,6 @@ function createElectricPolarization(elementId, gleichnamig) {
         let amount = (value) / 15;
         amount = Math.ceil(amount);
 
-        console.log(amount);
         for (let i = 0; i < amount; i++) {
             drawElement(canvas, 0, canvas.height / amount * i, 25, canvas.height / amount, (gleichnamig ? "rgba(0, 0, 255, 0.5)" : "rgba(255, 0, 0, 0.5)"), (gleichnamig ? "-" : "+"));
         }
