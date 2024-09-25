@@ -11,7 +11,25 @@ function createCanvas(elementId) {
 function updatePosition(context, x, v, a, t) {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     x = v * t + 0.5 * a * t * t;
-    context.fillRect(x, 25, 50, 50);
+
+    //shadow
+    context.fillStyle = "rgba(0,0,0,0.5)";
+    context.beginPath();
+    context.arc(x + 30, 55, 25, 0, 2 * Math.PI);
+    context.fill();
+
+    context.fillStyle = "red";
+    //circle
+    context.beginPath();
+    context.arc(x + 25, 50, 25, 0, 2 * Math.PI);
+    context.fill();
+
+    //highlight
+    context.fillStyle = "rgba(255,255,255,0.5)";
+    context.beginPath();
+    context.arc(x + 20, 45, 5, 0, 2 * Math.PI);
+    context.fill();
+
     return x;
 }
 
@@ -66,7 +84,7 @@ function createGleichfoermigeBewegung(elementId) {
     element.appendChild(buttons);
 
     createButton(buttons, "Start", function() {
-        startAnimation(elementId, 0.25, 0, spuren);
+        startAnimation(elementId, 0.5, 0, spuren);
     });
 
     createCheckbox(buttons, "Spur anzeigen", function() {
