@@ -94,6 +94,8 @@ function createCalculator(containerId, formula, formulaText, inputs) {
 
     const resultContainer = document.createElement('div');
     resultContainer.id = 'result' + containerId;
+    resultContainer.className = 'result';
+    resultContainer.innerHTML = 'Result: ';
     form.appendChild(resultContainer);
 
     container.appendChild(form);
