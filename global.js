@@ -59,10 +59,9 @@ function createCalculator(containerId, formula, formulaText, inputs) {
     form.className = 'calculator';
 
     //formular
-   const formular = document.createElement('div');
+    const formular = document.createElement('div');
     formular.innerHTML = `\\(${formulaText}\\) <br><br>`;
     form.appendChild(formular);
-
 
     inputs.forEach(input => {
         const label = document.createElement('label');
@@ -79,17 +78,7 @@ function createCalculator(containerId, formula, formulaText, inputs) {
     const button = document.createElement('button');
     button.type = 'button';
     button.textContent = 'Calculate';
-    button.onclick = () => {
-        const values = inputs.reduce((acc, input) => {
-            acc[input.id] = parseFloat(document.getElementById(input.id + containerId).value);
-            return acc;
-        }, {});
-        const result = formula(values);
-        const substitutedFormula = formulaText;
-        const resultContainer = document.getElementById('result' + containerId);
-        resultContainer.innerHTML = `Result: \\(${substitutedFormula} = ${result}\\)`;
-        MathJax.typesetPromise([resultContainer]);
-    };
+    button.onclick = calculateResult;
     form.appendChild(button);
 
     const resultContainer = document.createElement('div');
@@ -98,7 +87,24 @@ function createCalculator(containerId, formula, formulaText, inputs) {
     resultContainer.innerHTML = 'Result: ';
     form.appendChild(resultContainer);
 
+    form.onsubmit = (event) => {
+        event.preventDefault();
+        calculateResult();
+    };
+
     container.appendChild(form);
+
+    function calculateResult() {
+        const values = inputs.reduce((acc, input) => {
+            acc[input.id] = parseFloat(document.getElementById(input.id + containerId).value) || 0;
+            return acc;
+        }, {});
+        const result = formula(values);
+        const substitutedFormula = formulaText;
+        const resultContainer = document.getElementById('result' + containerId);
+        resultContainer.innerHTML = `Result: \\(${substitutedFormula} = ${result}\\)`;
+        MathJax.typesetPromise([resultContainer]);
+    }
 }
 
 function setHeaderContent(){
