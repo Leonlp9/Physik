@@ -535,3 +535,185 @@ function createElectricPolarization(elementId, gleichnamig) {
 
     }
 }
+
+function createValenceElectrons(elementId) {
+    const element = document.getElementById(elementId);
+    const animation = document.createElement("div");
+    animation.classList.add("animation");
+    element.appendChild(animation);
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 350;
+    canvas.height = 350;
+    animation.appendChild(canvas);
+
+    let interval = null;
+    createButton(animation, "Start", function() {
+        if (interval) {
+            clearInterval(interval);
+            interval = null;
+            this.innerText = "Start";
+        } else {
+            interval = setInterval(frame, 1000 / 60);
+            this.innerText = "Stop";
+        }
+    });
+
+    let electrons = [];
+    let nucleus = [];
+
+    function createElectron(x, y) {
+        electrons.push({ x, y, radius: 5, dx: Math.random() * 2 - 1, dy: Math.random() * 2 - 1 });
+    }
+
+    function createNucleus(x, y) {
+        nucleus.push({ x, y, radius: 10 });
+    }
+
+    let elementRadius = 75;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    for (let i = 0; i < 7; i++) {
+        createElectron(centerX + Math.random() * elementRadius - elementRadius / 2, centerY + Math.random() * elementRadius - elementRadius / 2);
+    }
+
+
+    createNucleus(centerX, centerY);
+    createNucleus(centerX + 46, centerY);
+    createNucleus(centerX - 46, centerY);
+    createNucleus(centerX + 23, centerY + 35);
+    createNucleus(centerX - 23, centerY + 35);
+    createNucleus(centerX + 23, centerY - 35);
+    createNucleus(centerX - 23, centerY - 35);
+
+
+    let mouseX = -100;
+    let mouseY = -100;
+
+    canvas.addEventListener("mousemove", function(event) {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = event.clientX - rect.left;
+        mouseY = event.clientY - rect.top;
+    });
+
+    //mouse leave canvas
+    canvas.addEventListener("mouseleave", function() {
+        mouseX = -100;
+        mouseY = -100;
+    });
+
+    function frame() {
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw the element circle
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, elementRadius, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(129,129,129,0.5)";
+        ctx.fill();
+        ctx.strokeStyle = "black";
+        ctx.stroke();
+
+        // Draw electrons and update their positions
+        electrons.forEach(electron => {
+            drawElectron(canvas, electron.x, electron.y, electron.radius);
+
+            const dx = mouseX - electron.x;
+            const dy = mouseY - electron.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // If the mouse is within a certain range, move the electron towards the mouse
+            const range = 125;
+            if (distance < range) {
+                const angle = Math.atan2(dy, dx);
+                electron.dx = Math.cos(angle) * 1.5;
+                electron.dy = Math.sin(angle) * 1.5;
+            }
+
+            electron.x += electron.dx;
+            electron.y += electron.dy;
+
+            // Check if the electron is outside the element radius
+            const ex = electron.x - centerX;
+            const ey = electron.y - centerY;
+            const edistance = Math.sqrt(ex * ex + ey * ey);
+
+            if (edistance + electron.radius > elementRadius) {
+                // Reflect the electron's direction
+                const angle = Math.atan2(ey, ex);
+                electron.dx = -Math.cos(angle);
+                electron.dy = -Math.sin(angle);
+
+                // Move the electron back inside the element radius
+                electron.x = centerX + (elementRadius - electron.radius) * Math.cos(angle);
+                electron.y = centerY + (elementRadius - electron.radius) * Math.sin(angle);
+            }
+
+            // Check for collisions with other electrons
+            electrons.forEach(otherElectron => {
+                if (electron !== otherElectron) {
+                    const dx = electron.x - otherElectron.x;
+                    const dy = electron.y - otherElectron.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Apply a repulsive force even at a distance
+                    const repulsionRange = 50;
+                    if (distance < repulsionRange) {
+                        const angle = Math.atan2(dy, dx);
+                        const force = (repulsionRange - distance) / repulsionRange * 0.05;
+                        electron.dx += Math.cos(angle) * force;
+                        electron.dy += Math.sin(angle) * force;
+                        otherElectron.dx -= Math.cos(angle) * force;
+                        otherElectron.dy -= Math.sin(angle) * force;
+                    }
+
+                    if (distance < electron.radius + otherElectron.radius) {
+                        // Reflect the electron's direction
+                        const angle = Math.atan2(dy, dx);
+                        electron.dx = Math.cos(angle);
+                        electron.dy = Math.sin(angle);
+                        otherElectron.dx = -Math.cos(angle);
+                        otherElectron.dy = -Math.sin(angle);
+
+                        // Move the electrons apart
+                        const overlap = electron.radius + otherElectron.radius - distance;
+                        electron.x += Math.cos(angle) * overlap / 2;
+                        electron.y += Math.sin(angle) * overlap / 2;
+                        otherElectron.x -= Math.cos(angle) * overlap / 2;
+                        otherElectron.y -= Math.sin(angle) * overlap / 2;
+                    }
+                }
+            });
+
+            // Check for collisions with the nucleus
+            nucleus.forEach(nucleus => {
+                const dx = electron.x - nucleus.x;
+                const dy = electron.y - nucleus.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < electron.radius + nucleus.radius) {
+                    // Reflect the electron's direction
+                    const angle = Math.atan2(dy, dx);
+                    electron.dx = Math.cos(angle);
+                    electron.dy = Math.sin(angle);
+
+                    // Move the electron back outside the nucleus radius
+                    electron.x = nucleus.x + (nucleus.radius + electron.radius) * Math.cos(angle);
+                    electron.y = nucleus.y + (nucleus.radius + electron.radius) * Math.sin(angle);
+                }
+            });
+        });
+
+        // Draw the nucleus
+        nucleus.forEach(nucleus => {
+            drawAtomShellWithNucleus(canvas, nucleus.x, nucleus.y, nucleus.radius);
+        });
+
+        drawProton(canvas, mouseX, mouseY, 10);
+    }
+
+    for (let i = 0; i < 10; i++) {
+        frame()
+    }
+}
