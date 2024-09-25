@@ -13,6 +13,24 @@
 
     <script src="https://kit.fontawesome.com/8482ce4752.js" crossorigin="anonymous"></script>
 
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            options: {
+                enableMenu: false
+            },
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            chtml: {
+                scale: 1.3  // Increase font size by 30%
+            }
+        };
+    </script>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <link rel="stylesheet" href="../style.css">
     <script src="../global.js"></script>
     <script src="script.js"></script>
@@ -34,16 +52,7 @@
     <meta property="og:type" content="website">
 
 </head>
-<header>
-    <div class="container">
-        <nav class="navbar">
-            <h1>Physik</h1>
-            <ul>
-<!--                <li><a href="index.html">Teilgebiete</a></li>-->
-            </ul>
-        </nav>
-    </div>
-</header>
+<header></header>
 <body>
     <div class="container">
 
@@ -57,31 +66,29 @@
         </div>
 
         <div class="content">
-<!--            Gleichförmige Bewegung-->
+            <!-- Gleichförmige Bewegung -->
             <div id="gleichfoermigeBewegung" class="simulation">
                 <script>createGleichfoermigeBewegung("gleichfoermigeBewegung")</script>
                 <div class="text">
                     <h2><a href="#gleichfoermigeBewegung"># Gleichförmige Bewegung</a></h2>
-                    <p>Die gleichförmige Bewegung ist eine Bewegung, bei der sich ein Körper mit konstanter Geschwindigkeit in eine Richtung bewegt.</p>
+                    <p>Die gleichförmige Bewegung ist eine Bewegung, bei der sich ein Körper mit konstanter Geschwindigkeit in eine Richtung bewegt. Dies bedeutet, dass der Körper in gleichen Zeitabständen gleiche Strecken zurücklegt. Ein Beispiel für eine gleichförmige Bewegung ist ein Auto, das mit einer konstanten Geschwindigkeit auf einer geraden Straße fährt. In der Physik wird die gleichförmige Bewegung oft durch die Formel \(s = v \cdot t\) beschrieben, wobei \(s\) die zurückgelegte Strecke, \(v\) die konstante Geschwindigkeit und \(t\) die Zeit ist.</p>
                 </div>
             </div>
 
-<!--            Beschleunigte Bewegung - nicht gleichförmig-->
+            <!-- Beschleunigte Bewegung - nicht gleichförmig -->
             <div id="beschleunigteBewegung" class="simulation">
                 <script>createBeschleunigteBewegung("beschleunigteBewegung")</script>
                 <div class="text">
                     <h2><a href="#beschleunigteBewegung"># Beschleunigte Bewegung</a></h2>
-                    <p>Die beschleunigte Bewegung ist eine Bewegung, bei der sich die Geschwindigkeit eines Körpers ändert.</p>
+                    <p>Die beschleunigte Bewegung ist eine Bewegung, bei der sich die Geschwindigkeit eines Körpers ändert. Dies kann entweder eine Zunahme oder eine Abnahme der Geschwindigkeit sein. Ein Beispiel für eine beschleunigte Bewegung ist ein Auto, das von einer Ampel anfährt und dabei immer schneller wird. In der Physik wird die beschleunigte Bewegung oft durch die Formel \(a = \frac{\Delta v}{\Delta t}\) beschrieben, wobei \(a\) die Beschleunigung, \(\Delta v\) die Geschwindigkeitsänderung und \(\Delta t\) die Zeit ist, in der die Änderung stattfindet. Beschleunigte Bewegungen können auch durch Kräfte verursacht werden, wie zum Beispiel die Schwerkraft, die einen fallenden Apfel beschleunigt.</p>
                 </div>
             </div>
         </div>
     </div>
 </body>
-<footer>
-    <p>2024 Leon Rabe. Schülerprojekt</p>
-    <p>
-        <a href="https://leonlp9.github.io/PrivatLinkTree/">Kontakt</a> |
-        <a href="https://github.com/Leonlp9/Physik" target="_blank">Github Repository</a>
-    </p>
-</footer>
+<footer></footer>
+<script>
+    setHeaderContent();
+    setFooterContent();
+</script>
 </html>

@@ -32,3 +32,24 @@ function createSlider(parent, min, max, value, step, onChange) {
     slider.oninput = onChange;
     parent.appendChild(slider);
 }
+
+
+function setHeaderContent(){
+    const header = document.querySelector("header");
+    header.innerHTML = `<div class="container">
+        <nav class="navbar">
+          <h1>Physik</h1>
+          <ul>
+          </ul>
+        </nav>
+      </div>`;
+}
+
+function setFooterContent(){
+    const footer = document.querySelector("footer");
+    footer.innerHTML = `<p>2024 Leon Rabe. Schülerprojekt</p>
+      <p>
+        <a href="https://leonlp9.github.io/PrivatLinkTree/">Kontakt</a> |
+        <a href="https://github.com/Leonlp9/Physik" target="_blank">Github Repository</a>
+      </p>`;
+}
