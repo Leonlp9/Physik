@@ -76,7 +76,29 @@ body{
 }
 
 body > .container{
+    padding: 0;
+}
+
+.breadcrumb{
+    margin-top: 10px;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+body > .container > h1{
+    font-size: 30px;
+    margin: 0;
+    padding: 40px 20px 70px 20px;
+    background: #fada58;
+    border-radius: 5px;
+}
+
+body > .container > .content{
     background: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 h1{
