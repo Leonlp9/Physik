@@ -67,12 +67,13 @@ function createButton(parent, text, onClick) {
     parent.appendChild(button);
 }
 
-function createSlider(parent, min, max, value, onChange) {
+function createSlider(parent, min, max, value, step, onChange) {
     const slider = document.createElement("input");
     slider.type = "range";
     slider.min = min;
     slider.max = max;
     slider.value = value;
+    slider.step = step;
     slider.oninput = onChange;
     parent.appendChild(slider);
 }
@@ -379,7 +380,7 @@ function createMagneticField(elementId, type){
 
 }
 
-function createElectricPolarization(elementId) {
+function createElectricPolarization(elementId, gleichnamig) {
     const element = document.getElementById(elementId);
     const animation = document.createElement("div");
     animation.classList.add("animation");
@@ -390,7 +391,7 @@ function createElectricPolarization(elementId) {
     canvas.height = 200;
     animation.appendChild(canvas);
 
-    createSlider(animation, 0, 65, 0, function () {
+    createSlider(animation, 0, 70, 0, 5, function () {
         frame(this.value);
     });
 
@@ -407,7 +408,7 @@ function createElectricPolarization(elementId) {
         //erstelle ein kreis, der immer weiter oval wird
         const width = 30 + value;
         const height = 30;
-        const x = canvas.width / 1.5 - value;
+        const x = canvas.width / (gleichnamig ? 2.5 : 1.5) + (gleichnamig ? value : -value);
         const y = canvas.height / 2;
         ctx.beginPath();
         ctx.ellipse(x, y, width, height, 0, 0, Math.PI * 2);
@@ -415,16 +416,15 @@ function createElectricPolarization(elementId) {
         ctx.fill(); // Fill the ellipse
         ctx.stroke();
 
-        drawProton(canvas, canvas.width / 1.5, canvas.height / 2, 10);
+        drawProton(canvas, canvas.width / (gleichnamig ? 2.5 : 1.5), canvas.height / 2, 10);
 
         let amount = (value) / 15;
         amount = Math.ceil(amount);
 
         console.log(amount);
         for (let i = 0; i < amount; i++) {
-            drawElement(canvas, 0, canvas.height / amount * i, 25, canvas.height / amount, "rgba(255, 0, 0, 0.5)", "+");
+            drawElement(canvas, 0, canvas.height / amount * i, 25, canvas.height / amount, (gleichnamig ? "rgba(0, 0, 255, 0.5)" : "rgba(255, 0, 0, 0.5)"), (gleichnamig ? "-" : "+"));
         }
 
     }
-
 }
