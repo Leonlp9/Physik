@@ -48,6 +48,9 @@ function startAnimation(elementId, v, a, spuren) {
         // Stop the animation if the object touches the right wall
         if (x + 50 < context.canvas.width) {
             animationFrameId = requestAnimationFrame(update);
+            if (v === 0 && a === 0) {
+                cancelAnimationFrame(animationFrameId);
+            }
         }
     }
     update();
@@ -57,7 +60,7 @@ function createGleichfoermigeBewegung(elementId) {
     const element = document.getElementById(elementId);
     let spuren = false;
 
-    startAnimation(elementId, 0.25, 0, spuren);
+    startAnimation(elementId, 0, 0, spuren);
 
     const buttons = document.createElement("div");
     element.appendChild(buttons);
@@ -75,7 +78,7 @@ function createBeschleunigteBewegung(elementId) {
     const element = document.getElementById(elementId);
     let spuren = false;
 
-    startAnimation(elementId, 0, 0.005, spuren);
+    startAnimation(elementId, 0, 0, spuren);
 
     const buttons = document.createElement("div");
     element.appendChild(buttons);
