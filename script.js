@@ -417,7 +417,13 @@ function createElectricPolarization(elementId) {
 
         drawProton(canvas, canvas.width / 1.5, canvas.height / 2, 10);
 
-        drawElement(canvas, 0, 0, 25, 200, "rgba(255, 0, 0, 0.5)", (value > 0) ? (value > 32 ? (value > 64 ? "+++" : "++") : "+") : "");
+        let amount = (value) / 15;
+        amount = Math.ceil(amount);
+
+        console.log(amount);
+        for (let i = 0; i < amount; i++) {
+            drawElement(canvas, 0, canvas.height / amount * i, 25, canvas.height / amount, "rgba(255, 0, 0, 0.5)", "+");
+        }
 
     }
 
