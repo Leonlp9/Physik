@@ -67,6 +67,16 @@ function createButton(parent, text, onClick) {
     parent.appendChild(button);
 }
 
+function createSlider(parent, min, max, value, onChange) {
+    const slider = document.createElement("input");
+    slider.type = "range";
+    slider.min = min;
+    slider.max = max;
+    slider.value = value;
+    slider.oninput = onChange;
+    parent.appendChild(slider);
+}
+
 function createRadialLine(elementId){
     const element = document.getElementById(elementId);
     const animation = document.createElement("div");
@@ -366,5 +376,49 @@ function createMagneticField(elementId, type){
     }
 
     frame();
+
+}
+
+function createElectricPolarization(elementId) {
+    const element = document.getElementById(elementId);
+    const animation = document.createElement("div");
+    animation.classList.add("animation");
+    element.appendChild(animation);
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 300;
+    canvas.height = 200;
+    animation.appendChild(canvas);
+
+    createSlider(animation, 0, 65, 0, function () {
+        frame(this.value);
+    });
+
+    frame(0);
+
+    function frame(value) {
+
+        value = Math.floor(value);
+
+        //clear canvas
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        //erstelle ein kreis, der immer weiter oval wird
+        const width = 30 + value;
+        const height = 30;
+        const x = canvas.width / 1.5 - value;
+        const y = canvas.height / 2;
+        ctx.beginPath();
+        ctx.ellipse(x, y, width, height, 0, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
+        ctx.fill(); // Fill the ellipse
+        ctx.stroke();
+
+        drawProton(canvas, canvas.width / 1.5, canvas.height / 2, 10);
+
+        drawElement(canvas, 0, 0, 25, 200, "rgba(255, 0, 0, 0.5)", (value > 0) ? (value > 32 ? (value > 64 ? "+++" : "++") : "+") : "");
+
+    }
 
 }
