@@ -75,22 +75,25 @@ body{
     background: #f5f5f5;
 }
 
-body > .container{
-    padding: 0;
-}
-
 .breadcrumb{
     margin-top: 10px;
     padding: 0;
     margin-bottom: 10px;
 }
 
-body > .container > h1{
-    font-size: 30px;
-    margin: 0;
+.header{
     padding: 40px 20px 70px 20px;
     background: #fada58;
+    border-bottom: 4px solid rgba(177, 74, 143, 0.68);
     border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.header h1{
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
 }
 
 body > .container > .content{
@@ -99,6 +102,7 @@ body > .container > .content{
     border-radius: 5px;
     margin-top: 20px;
     margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 h1{

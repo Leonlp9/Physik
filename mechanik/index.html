@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Physik</title>
+
+    <!--    jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!--    bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/8482ce4752.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../style.css">
+    <script src="../global.js"></script>
+    <script src="script.js"></script>
+
+    <!-- meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Physik Simulationen">
+    <meta name="keywords" content="Physik, Simulationen, Schule, Lernen">
+    <meta name="author" content="Leon Rabe">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <meta name="language" content="de">
+
+    <!--   og link-->
+    <meta property="og:title" content="Physik Simulationen">
+    <meta property="og:description" content="Physik Simulationen">
+    <meta property="og:image" content="https://leonlp9.github.io/Physik/preview.png">
+    <meta property="og:url" content="https://leonlp9.github.io/Physik/">
+    <meta property="og:type" content="website">
+
+</head>
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <h1>Physik</h1>
+            <ul>
+<!--                <li><a href="index.html">Teilgebiete</a></li>-->
+            </ul>
+        </nav>
+    </div>
+</header>
+<body>
+    <div class="container">
+
+        <div class="breadcrumb">
+            <a href="../index.html"> Startseite</a> > <a href="index.html">Mechanik</a>
+        </div>
+
+        <div class="header">
+            <h1>Mechanik</h1>
+            Die Mechanik ist ein Teilgebiet der Physik, das sich mit der Bewegung von Körpern und den dabei auftretenden Kräften beschäftigt.
+        </div>
+
+        <div class="content">
+<!--            Gleichförmige Bewegung-->
+            <div id="gleichfoermigeBewegung" class="simulation">
+                <script>createGleichfoermigeBewegung("gleichfoermigeBewegung")</script>
+                <div class="text">
+                    <h2><a href="#gleichfoermigeBewegung"># Gleichförmige Bewegung</a></h2>
+                    <p>Die gleichförmige Bewegung ist eine Bewegung, bei der sich ein Körper mit konstanter Geschwindigkeit in eine Richtung bewegt.</p>
+                </div>
+            </div>
+
+<!--            Beschleunigte Bewegung - nicht gleichförmig-->
+            <div id="beschleunigteBewegung" class="simulation">
+                <script>createBeschleunigteBewegung("beschleunigteBewegung")</script>
+                <div class="text">
+                    <h2><a href="#beschleunigteBewegung"># Beschleunigte Bewegung</a></h2>
+                    <p>Die beschleunigte Bewegung ist eine Bewegung, bei der sich die Geschwindigkeit eines Körpers ändert.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <p>2024 Leon Rabe. Schülerprojekt</p>
+    <p>
+        <a href="https://leonlp9.github.io/PrivatLinkTree/">Kontakt</a> |
+        <a href="https://github.com/Leonlp9/Physik" target="_blank">Github Repository</a>
+    </p>
+</footer>
+</html>
