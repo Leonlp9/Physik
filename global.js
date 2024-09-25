@@ -58,6 +58,12 @@ function createCalculator(containerId, formula, formulaText, inputs) {
     const form = document.createElement('form');
     form.className = 'calculator';
 
+    //formular
+   const formular = document.createElement('div');
+    formular.innerHTML = `\\(${formulaText}\\) <br><br>`;
+    form.appendChild(formular);
+
+
     inputs.forEach(input => {
         const label = document.createElement('label');
         label.textContent = `${input.label}: `;

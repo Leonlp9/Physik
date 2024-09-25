@@ -108,6 +108,45 @@
                     ]);
                 </script>
             </div>
+
+            <!-- Freier Fall -->
+            <div id="freierFall" class="simulation">
+                <div class="text">
+                    <h2><a href="#freierFall"># Freier Fall</a></h2>
+                    <p>Der freie Fall ist eine spezielle Form der beschleunigten Bewegung, bei der ein Körper nur durch die Schwerkraft beeinflusst wird. Dies bedeutet, dass der Körper ohne äußere Einflüsse fällt und dabei immer schneller wird. Ein Beispiel für den freien Fall ist ein Apfel, der von einem Baum fällt. In der Physik wird der freie Fall oft durch die Formel \(s = \frac{1}{2} \cdot g \cdot t^2\) beschrieben, wobei \(s\) die zurückgelegte Strecke, \(g\) die Erdbeschleunigung und \(t\) die Zeit ist. Die Erdbeschleunigung beträgt etwa \(9,81 \, \text{m/s}^2\) und ist auf der gesamten Erdoberfläche nahezu konstant.</p>
+                </div>
+                <div id="freierFallCalculator"></div>
+                <script>
+
+                    function calculateS({ t }) {
+                        return 0.5 * 9.81 * t ** 2;
+                    }
+
+                    createCalculator('freierFallCalculator', calculateS, 's = \\frac{1}{2} \\cdot g \\cdot t^2', [
+                        { id: 't', label: 't (Zeit in s)' }
+                    ]);
+                </script>
+            </div>
+
+            <!-- Freier Fall mit Anfangsgeschwindigkeit -->
+            <div id="freierFallAnfangsgeschwindigkeit" class="simulation">
+                <div class="text">
+                    <h2><a href="#freierFallAnfangsgeschwindigkeit"># Freier Fall mit Anfangsgeschwindigkeit</a></h2>
+                    <p>Der freie Fall mit Anfangsgeschwindigkeit ist eine spezielle Form der beschleunigten Bewegung, bei der ein Körper mit einer Anfangsgeschwindigkeit fällt. Dies bedeutet, dass der Körper nicht nur durch die Schwerkraft, sondern auch durch die Anfangsgeschwindigkeit beeinflusst wird. Ein Beispiel für den freien Fall mit Anfangsgeschwindigkeit ist ein Ball, der von einem Turm geworfen wird. In der Physik wird der freie Fall mit Anfangsgeschwindigkeit oft durch die Formel \(s = v_0 \cdot t + \frac{1}{2} \cdot g \cdot t^2\) beschrieben, wobei \(s\) die zurückgelegte Strecke, \(v_0\) die Anfangsgeschwindigkeit, \(g\) die Erdbeschleunigung und \(t\) die Zeit ist.</p>
+                </div>
+                <div id="freierFallAnfangsgeschwindigkeitCalculator"></div>
+                <script>
+
+                    function calculateS({ v0, t }) {
+                        return v0 * t + 0.5 * 9.81 * t ** 2;
+                    }
+
+                    createCalculator('freierFallAnfangsgeschwindigkeitCalculator', calculateS, 's = v_0 \\cdot t + \\frac{1}{2} \\cdot g \\cdot t^2', [
+                        { id: 'v0', label: 'v_0 (Anfangsgeschwindigkeit in m/s)' },
+                        { id: 't', label: 't (Zeit in s)' }
+                    ]);
+                </script>
+            </div>
         </div>
     </div>
 </body>
