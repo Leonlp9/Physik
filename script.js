@@ -279,6 +279,7 @@ function createElectronFlow(elementId){
             electron.x += 1;
             if (electron.x > canvas.width + electron.radius) {
                 electron.x = -electron.radius;
+                electron.y = Math.random() * canvas.height;
             }
         });
 
