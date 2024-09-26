@@ -802,9 +802,19 @@ function createElectroscope(elementId) {
     }
 
     function drawMouseCharge(ctx) {
+        let red = 0;
+        let blue = 0;
+
+        if (mausLadung > 0) {
+            red = mausLadung * 155;
+        }
+        if (mausLadung < 0) {
+            blue = -mausLadung * 155;
+        }
+
         ctx.beginPath();
         ctx.arc(mausX, mausY, 25, 0, Math.PI * 2);
-        ctx.fillStyle = mausLadung === 0 ? "rgb(129,129,129)" : (mausLadung > 0 ? "rgb(255,0,0)" : "rgb(0,0,255)");
+        ctx.fillStyle = mausLadung === 0 ? "rgb(200,200,200)" : (mausLadung > 0 ? `rgb(${200 + red - blue},${200 - red - blue},${200 + blue - red})` : `rgb(${200 - red - blue},${200 + red - blue},${200 + blue - red})`);
         ctx.fill();
         ctx.font = "20px Arial";
         ctx.fillStyle = "white";
@@ -813,7 +823,12 @@ function createElectroscope(elementId) {
 
     function updateCharge() {
         if (mausX > 750 && mausY < 400) {
-            mausLadung = mausY < canvas.height / 3 ? -1 : (mausY < canvas.height / 3 * 2 ? 0 : 1);
+            const targetLadung = mausY < canvas.height / 3 ? -1 : (mausY < 2 * canvas.height / 3 ? 0 : 1);
+            if (mausLadung < targetLadung) {
+                mausLadung = Math.min(mausLadung + 0.025, targetLadung);
+            } else if (mausLadung > targetLadung) {
+                mausLadung = Math.max(mausLadung - 0.025, targetLadung);
+            }
         }
     }
 
