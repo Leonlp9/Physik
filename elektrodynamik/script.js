@@ -833,9 +833,9 @@ function createElectroscope(elementId) {
         if (distance < 50) {
             if (Math.sign(mausLadung) !== Math.sign(ladung) && ladung !== 0) {
                 if (ladung > 0) {
-                    ladung = Math.max(0, ladung - 0.3);
+                    ladung = Math.max(0, ladung - 0.25);
                 } else {
-                    ladung = Math.min(0, ladung + 0.3);
+                    ladung = Math.min(0, ladung + 0.25);
                 }
             } else {
                 ladung = Math.sign(mausLadung) * Math.min(1, Math.abs(ladung) + 0.1);
