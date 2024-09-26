@@ -787,68 +787,62 @@ function createElectroscope(elementId) {
     canvas.style.width = "100%";
     animation.appendChild(canvas);
 
-    let mausLadung = 0;
-    let ladung = 0;
+    let mausLadung = 0, gespeicherteLadung = 0, ladung = 0, mausX = -100, mausY = -100;
 
-    let mausX = -100;
-    let mausY = -100;
-
-    canvas.addEventListener("mousemove", function(event) {
+    canvas.addEventListener("mousemove", event => {
         const rect = canvas.getBoundingClientRect();
-        const scaleX = canvas.width / rect.width;
-        const scaleY = canvas.height / rect.height;
-        mausX = (event.clientX - rect.left) * scaleX;
-        mausY = (event.clientY - rect.top) * scaleY;
+        mausX = (event.clientX - rect.left) * (canvas.width / rect.width);
+        mausY = (event.clientY - rect.top) * (canvas.height / rect.height);
     });
+
+    function drawChargeSelection(ctx) {
+        ["rgba(0, 0, 255, 0.5)", "rgba(143,143,143,0.5)", "rgba(255, 0, 0, 0.5)"].forEach((color, i) => {
+            drawElement(canvas, 775, i * canvas.height / 3, 25, canvas.height / 3, color, ["-", "0", "+"][i]);
+        });
+    }
+
+    function drawMouseCharge(ctx) {
+        ctx.beginPath();
+        ctx.arc(mausX, mausY, 25, 0, Math.PI * 2);
+        ctx.fillStyle = mausLadung === 0 ? "rgb(129,129,129)" : (mausLadung > 0 ? "rgb(255,0,0)" : "rgb(0,0,255)");
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "white";
+        ctx.fillText(mausLadung === 0 ? "0" : (mausLadung > 0 ? "+" : "-"), mausX, mausY);
+    }
+
+    function updateCharge() {
+        if (mausX > 750 && mausY < 400) {
+            mausLadung = mausY < canvas.height / 3 ? -1 : (mausY < canvas.height / 3 * 2 ? 0 : 1);
+        }
+    }
+
+    function updateElectroscopeCharge(distance) {
+        const distanceFactor = Math.exp(-distance / 50);
+        ladung = gespeicherteLadung;
+
+        if (distance < 48) {
+            gespeicherteLadung = mausLadung === 0 ? Math.sign(gespeicherteLadung) * Math.max(Math.abs(gespeicherteLadung) - 0.1, 0) : Math.min(Math.max(gespeicherteLadung + mausLadung * 0.1, -1), 1);
+            ladung = gespeicherteLadung;
+        } else if (distance < 150 && mausLadung !== 0) {
+            ladung += mausLadung * distanceFactor;
+        }
+
+        ladung = Math.sign(ladung) * Math.min(Math.abs(ladung), Math.PI / 4);
+    }
 
     function frame() {
         const ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         drawElektroskop(ctx, ladung);
+        drawChargeSelection(ctx);
+        drawMouseCharge(ctx);
+        updateCharge();
 
-        drawElement(canvas, 775, 0, 25, 133, "rgba(0, 0, 255, 0.5)", "-");
-        drawElement(canvas, 775, 133, 25, 133, "rgba(143,143,143,0.5)", "0");
-        drawElement(canvas, 775, 266, 25, 134, "rgba(255, 0, 0, 0.5)", "+");
-
-        ctx.beginPath();
-        ctx.arc(mausX, mausY, 25, 0, Math.PI * 2);
-        ctx.fillStyle = (mausLadung === 0 ? "rgb(129,129,129)" : (mausLadung > 0 ? "rgb(255,0,0)" : "rgb(0,0,255)"));
-        ctx.fill();
-
-        // Add text
-        ctx.font = "20px Arial";
-        ctx.fillStyle = "white";
-        ctx.fillText((mausLadung === 0 ? "0" : (mausLadung > 0 ? "+" : "-")), mausX, mausY);
-
-        // If mouse is in range of an element, set the charge
-        if (mausX > 750 && mausY < 400) {
-            mausLadung = mausY < 133 ? -1 : (mausY < 266 ? 0 : 1);
-        }
-
-        // Distance to the metal ball of the electroscope
-        const dx = 200 - mausX;
-        const dy = 113 - mausY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        // If mouse is near the metal ball, set the charge
-        if (distance < 50) {
-            ladung = Math.sign(mausLadung) * Math.min(1, Math.abs(ladung) + 0.1);
-        } else if (distance < 150) {
-            // Limit the maximum charge
-            const maxCharge = 1;
-            const factor = Math.exp(-distance / 35);
-            ladung = Math.min(Math.max(Math.sign(mausLadung) * Math.min(maxCharge, Math.abs(ladung) + factor * 0.1), -factor), factor);
-        } else {
-            // Gradually return to neutral when the mouse moves away
-            ladung = ladung * 0.95;
-        }
-
-        // Limit the maximum angle of the electroscope
-        const maxAngle = Math.PI / 4; // 45 degrees
-        if (Math.abs(ladung) > maxAngle) {
-            ladung = Math.sign(ladung) * maxAngle;
-        }
+        const distance = Math.sqrt(Math.pow(200 - mausX, 2) + Math.pow(113 - mausY, 2));
+        updateElectroscopeCharge(distance);
     }
+
     setInterval(frame, 1000 / 60);
 }
