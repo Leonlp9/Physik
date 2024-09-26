@@ -837,7 +837,7 @@ function createElectroscope(elementId) {
         ladung = gespeicherteLadung;
 
         if (distance < 48) {
-            gespeicherteLadung = mausLadung === 0 ? Math.sign(gespeicherteLadung) * Math.max(Math.abs(gespeicherteLadung) - 0.1, 0) : Math.min(Math.max(gespeicherteLadung + mausLadung * 0.1, -1), 1);
+            gespeicherteLadung = mausLadung === 0 ? Math.sign(gespeicherteLadung) * Math.max(Math.abs(gespeicherteLadung) - 0.035, 0) : Math.min(Math.max(gespeicherteLadung + mausLadung * 0.035, -1), 1);
             ladung = gespeicherteLadung;
         } else if (distance < 150 && mausLadung !== 0) {
             ladung += mausLadung * distanceFactor;
