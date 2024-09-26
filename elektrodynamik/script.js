@@ -687,3 +687,119 @@ function createValenceElectrons(elementId) {
         frame()
     }
 }
+
+function createElectroscope(elementId) {
+    const element = document.getElementById(elementId);
+    const animation = document.createElement("div");
+    animation.classList.add("animation");
+    element.appendChild(animation);
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 800;
+    canvas.height = 400;
+    canvas.style.width = "100%";
+    animation.appendChild(canvas);
+
+    let ladung = 0;
+
+    createSlider(animation, -1, 1, 0, 0.05, function () {
+        ladung = parseFloat(this.value);
+        frame();
+    });
+
+    /**
+     * Zeichnet ein Elektroskop
+     * @param ctx CanvasRenderingContext
+     * @param ladung -1 für negativ, 0 für neutral, 1 für positiv (Kommazahlen für Zwischenzustände)
+     */
+    function drawElektroskop(ctx, ladung) {
+
+        let red = 0;
+        let blue = 0;
+
+        //wenn ladung positiv, dann rot immer mehr rot
+        if (ladung > 0) {
+            red = ladung * 155;
+        }
+        //wenn ladung negativ, dann blau immer mehr blau
+        if (ladung < 0) {
+            blue = -ladung * 155;
+        }
+
+        //draw electroscope fuß
+        ctx.beginPath();
+        ctx.moveTo(100, 390);
+        ctx.lineTo(300, 390);
+        ctx.lineTo(300, 375);
+        ctx.lineTo(210, 375);
+        ctx.lineTo(210, 350);
+        ctx.lineTo(190, 350);
+        ctx.lineTo(190, 375);
+        ctx.lineTo(100, 375);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(97,97,97)";
+        ctx.fill();
+
+        //draw electroscope casing
+        ctx.beginPath();
+        //kreis
+        ctx.arc(200, 250, 100, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgb(140,140,140)";
+        ctx.lineWidth = 5;
+        ctx.stroke();
+
+        //draw isolator
+        ctx.beginPath();
+        ctx.moveTo(200, 140);
+        ctx.lineTo(200, 160);
+        ctx.strokeStyle = "rgb(80,80,80)";
+        ctx.lineWidth = 30;
+        ctx.stroke();
+
+        //draw metal rod
+        ctx.beginPath();
+        ctx.moveTo(200, 135);
+        ctx.lineTo(200, 180);
+        ctx.lineTo(190, 190);
+        ctx.lineTo(190, 245);
+        ctx.lineTo(210, 255);
+        ctx.lineTo(210, 320);
+        ctx.strokeStyle = `rgb(${200 + red - blue},${200 - red - blue},${200 + blue - red})`;
+        ctx.lineWidth = 5;
+        ctx.stroke();
+
+        //draw drehachse
+        ctx.beginPath();
+        ctx.arc(200, 250, 5, 0, Math.PI * 2);
+        ctx.fillStyle = "rgb(216,193,51)";
+        ctx.fill();
+
+        //draw metall ball
+        ctx.beginPath();
+        ctx.arc(200, 113, 20, 0, Math.PI * 2);
+        ctx.fillStyle = `rgb(${200 + red - blue},${200 - red - blue},${200 + blue - red})`;
+        ctx.fill();
+        ctx.stroke();
+
+        //draw metallzeiger
+        ctx.beginPath();
+        let winkel = Math.PI / 2;
+        winkel += Math.abs(ladung)
+        ctx.moveTo(200 - Math.cos(winkel) * 60, 250 - Math.sin(winkel) * 60);
+        ctx.lineTo(200 + Math.cos(winkel) * 60, 250 + Math.sin(winkel) * 60);
+        ctx.strokeStyle = `rgb(${227 + red - blue},${227 - red - blue},${227 + blue - red})`;
+        ctx.lineWidth = 5;
+        ctx.stroke();
+
+    }
+
+    function frame(){
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        drawElektroskop(ctx, ladung);
+
+    }
+
+    frame();
+}
