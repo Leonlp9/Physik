@@ -1,9 +1,14 @@
-function createCanvas(elementId) {
+function createCanvas(elementId, horizontal = true) {
     var element = document.getElementById(elementId);
     var canvas = document.createElement("canvas");
-    canvas.width = 1000;
-    canvas.height = 100;
-    canvas.style.width = "100%";
+    if (horizontal) {
+        canvas.width = 1000;
+        canvas.height = 100;
+        canvas.style.width = "100%";
+    }else {
+        canvas.width = 100;
+        canvas.height = 1000;
+    }
     element.appendChild(canvas);
     return canvas.getContext("2d");
 }
@@ -33,9 +38,9 @@ function updatePosition(context, x, v, a, t) {
     return x;
 }
 
-function startAnimation(elementId, v, a, spuren) {
+function startAnimation(elementId, v, a, spuren, horizontal = true) {
     //wenn es schon ein canvas gibt nimm das ansonsten erstelle eins
-    var context = document.querySelector("#" + elementId + " canvas")?.getContext("2d") || createCanvas(elementId);
+    var context = document.querySelector("#" + elementId + " canvas")?.getContext("2d") || createCanvas(elementId, horizontal);
     var x = 0;
     var t = 0;
     var lastTime = new Date().getTime();
