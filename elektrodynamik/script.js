@@ -700,11 +700,18 @@ function createElectroscope(elementId) {
     canvas.style.width = "100%";
     animation.appendChild(canvas);
 
+    let mausLadung = 0;
     let ladung = 0;
 
-    createSlider(animation, -1, 1, 0, 0.05, function () {
-        ladung = parseFloat(this.value);
-        frame();
+    let mausX = -100;
+    let mausY = -100;
+
+    canvas.addEventListener("mousemove", function(event) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        mausX = (event.clientX - rect.left) * scaleX;
+        mausY = (event.clientY - rect.top) * scaleY;
     });
 
     /**
@@ -799,7 +806,45 @@ function createElectroscope(elementId) {
 
         drawElektroskop(ctx, ladung);
 
+        drawElement(canvas, 775, 0, 25, 200, "rgba(0, 0, 255, 0.5)", "-");
+        drawElement(canvas, 775, 200, 25, 200, "rgba(255, 0, 0, 0.5)", "+");
+
+        ctx.beginPath();
+        ctx.arc(mausX, mausY, 25, 0, Math.PI * 2);
+        ctx.fillStyle = (mausLadung === 0 ? "rgb(129,129,129)" : (mausLadung > 0 ? "rgb(255,0,0)" : "rgb(0,0,255)"));
+        ctx.fill();
+
+        //add text
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "white";
+        ctx.fillText((mausLadung === 0 ? "0" : (mausLadung > 0 ? "+" : "-")), mausX, mausY);
+
+        //wenn maus range in einem element ist, dann setze die ladung
+        if (mausX > 750 && mausY < 400) {
+            mausLadung = mausY < 200 ? -1 : 1;
+        }
+
+        //distance to the metall ball of the electroscope
+        const dx = 200 - mausX;
+        const dy = 113 - mausY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        //wenn maus in der nähe des metall balls ist, dann setze die ladung
+        if (distance < 50) {
+            if (Math.sign(mausLadung) !== Math.sign(ladung) && ladung !== 0) {
+                if (ladung > 0) {
+                    ladung = Math.max(0, ladung - 0.3);
+                } else {
+                    ladung = Math.min(0, ladung + 0.3);
+                }
+            } else {
+                ladung = Math.sign(mausLadung) * Math.min(1, Math.abs(ladung) + 0.1);
+            }
+        }else {
+
+        }
+
     }
 
-    frame();
+    setInterval(frame, 1000 / 60);
 }
