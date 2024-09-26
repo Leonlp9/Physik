@@ -53,10 +53,15 @@ function createCheckbox(parent, text, onChange) {
     parent.appendChild(container);
 }
 
-function createCalculator(containerId, formula, formulaText, inputs) {
+function createCalculator(title, containerId, formula, formulaText, inputs) {
     const container = document.getElementById(containerId);
     const form = document.createElement('form');
     form.className = 'calculator';
+
+    //title
+    const titleElement = document.createElement('h2');
+    titleElement.textContent = title;
+    form.appendChild(titleElement);
 
     //formular
     const formular = document.createElement('div');

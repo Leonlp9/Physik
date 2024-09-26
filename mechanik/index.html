@@ -80,7 +80,7 @@
                         return v * t;
                     }
 
-                    createCalculator('gleichfoermigeBewegungCalculator', calculateS, 's = v \\cdot t', [
+                    createCalculator('Berechnung der Strecke in der gleichförmigen Bewegung', 'gleichfoermigeBewegungCalculator', calculateS, 's = v \\cdot t', [
                         { id: 'v', label: 'v (Geschwindigkeit in m/s)' },
                         { id: 't', label: 't (Zeit in s)' }
                     ]);
@@ -102,7 +102,7 @@
                         return deltaV / deltaT;
                     }
 
-                    createCalculator('beschleunigteBewegungCalculator', calculateA, 'a = \\frac{\\Delta v}{\\Delta t}', [
+                    createCalculator('Berechnung der Beschleunigung in der beschleunigten Bewegung', 'beschleunigteBewegungCalculator', calculateA, 'a = \\frac{\\Delta v}{\\Delta t}', [
                         { id: 'deltaV', label: 'Delta v (Geschwindigkeitsänderung in m/s)' },
                         { id: 'deltaT', label: 'Delta t (Zeit in s)' }
                     ]);
@@ -122,7 +122,7 @@
                         return 0.5 * 9.81 * t ** 2;
                     }
 
-                    createCalculator('freierFallCalculator', calculateS, 's = \\frac{1}{2} \\cdot g \\cdot t^2', [
+                    createCalculator('Berechnung der Strecke im freien Fall', 'freierFallCalculator', calculateS, 's = \\frac{1}{2} \\cdot g \\cdot t^2', [
                         { id: 't', label: 't (Zeit in s)' }
                     ]);
                 </script>
@@ -141,7 +141,7 @@
                         return v0 * t + 0.5 * 9.81 * t ** 2;
                     }
 
-                    createCalculator('freierFallAnfangsgeschwindigkeitCalculator', calculateS, 's = v_0 \\cdot t + \\frac{1}{2} \\cdot g \\cdot t^2', [
+                    createCalculator('Berechnung der Strecke im freien Fall mit Anfangsgeschwindigkeit', 'freierFallAnfangsgeschwindigkeitCalculator', calculateS, 's = v_0 \\cdot t + \\frac{1}{2} \\cdot g \\cdot t^2', [
                         { id: 'v0', label: 'v_0 (Anfangsgeschwindigkeit in m/s)' },
                         { id: 't', label: 't (Zeit in s)' }
                     ]);
