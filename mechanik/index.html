@@ -72,9 +72,12 @@
                     <p>Die gleichförmige Bewegung ist eine Bewegung, bei der sich ein Körper mit konstanter Geschwindigkeit in eine Richtung bewegt. Dies bedeutet, dass der Körper in gleichen Zeitabständen gleiche Strecken zurücklegt. Ein Beispiel für eine gleichförmige Bewegung ist ein Auto, das mit einer konstanten Geschwindigkeit auf einer geraden Straße fährt. In der Physik wird die gleichförmige Bewegung oft durch die Formel \(s = v \cdot t\) beschrieben, wobei \(s\) die zurückgelegte Strecke, \(v\) die konstante Geschwindigkeit und \(t\) die Zeit ist.</p>
                 </div>
                 <div id="gleichfoermigeBewegungSimulation"></div>
-                <div id="gleichfoermigeBewegungCalculator1"></div>
-                <div id="gleichfoermigeBewegungCalculator2"></div>
-                <div id="gleichfoermigeBewegungCalculator3"></div>
+                <details>
+                    <summary>Formeln</summary>
+                    <div id="gleichfoermigeBewegungCalculator1"></div>
+                    <div id="gleichfoermigeBewegungCalculator2"></div>
+                    <div id="gleichfoermigeBewegungCalculator3"></div>
+                </details>
                 <script>
                     createGleichfoermigeBewegung("gleichfoermigeBewegungSimulation")
 
@@ -114,7 +117,12 @@
                     <p>Die beschleunigte Bewegung ist eine Bewegung, bei der sich die Geschwindigkeit eines Körpers ändert. Dies kann entweder eine Zunahme oder eine Abnahme der Geschwindigkeit sein. Ein Beispiel für eine beschleunigte Bewegung ist ein Auto, das von einer Ampel anfährt und dabei immer schneller wird. In der Physik wird die beschleunigte Bewegung oft durch die Formel \(a = \frac{\Delta v}{\Delta t}\) beschrieben, wobei \(a\) die Beschleunigung, \(\Delta v\) die Geschwindigkeitsänderung und \(\Delta t\) die Zeit ist, in der die Änderung stattfindet. Beschleunigte Bewegungen können auch durch Kräfte verursacht werden, wie zum Beispiel die Schwerkraft, die einen fallenden Apfel beschleunigt.</p>
                 </div>
                 <div id="beschleunigteBewegungSimulation"></div>
-                <div id="beschleunigteBewegungCalculator1"></div>
+                <details>
+                    <summary>Formeln</summary>
+                    <div id="beschleunigteBewegungCalculator1"></div>
+                    <div id="beschleunigteBewegungCalculator2"></div>
+                    <div id="beschleunigteBewegungCalculator3"></div>
+                </details>
                 <script>
                     createBeschleunigteBewegung("beschleunigteBewegungSimulation")
 
@@ -126,6 +134,24 @@
                         { id: 'deltaV', label: 'Delta v (Geschwindigkeitsänderung in m/s)' },
                         { id: 'deltaT', label: 'Delta t (Zeit in s)' }
                     ]);
+
+                    function calculateDeltaV({ a, deltaT }) {
+                        return a * deltaT;
+                    }
+
+                    createCalculator('Berechnung der Geschwindigkeitsänderung in der beschleunigten Bewegung', 'beschleunigteBewegungCalculator2', calculateDeltaV, '\\Delta v = a \\cdot \\Delta t', [
+                        { id: 'a', label: 'a (Beschleunigung in m/s^2)' },
+                        { id: 'deltaT', label: 'Delta t (Zeit in s)' }
+                    ]);
+
+                    function calculateDeltaT({ a, deltaV }) {
+                        return deltaV / a;
+                    }
+
+                    createCalculator('Berechnung der Zeit in der beschleunigten Bewegung', 'beschleunigteBewegungCalculator3', calculateDeltaT, '\\Delta t = \\frac{\\Delta v}{a}', [
+                        { id: 'a', label: 'a (Beschleunigung in m/s^2)' },
+                        { id: 'deltaV', label: 'Delta v (Geschwindigkeitsänderung in m/s)' }
+                    ]);
                 </script>
             </div>
 
@@ -135,9 +161,12 @@
                     <h2><a href="#freierFall"># Freier Fall</a></h2>
                     <p>Der freie Fall ist eine spezielle Form der beschleunigten Bewegung, bei der ein Körper nur durch die Schwerkraft beeinflusst wird. Dies bedeutet, dass der Körper ohne äußere Einflüsse fällt und dabei immer schneller wird. Ein Beispiel für den freien Fall ist ein Apfel, der von einem Baum fällt. In der Physik wird der freie Fall oft durch die Formel \(s = \frac{1}{2} \cdot g \cdot t^2\) beschrieben, wobei \(s\) die zurückgelegte Strecke, \(g\) die Erdbeschleunigung und \(t\) die Zeit ist. Die Erdbeschleunigung beträgt etwa \(9,81 \, \text{m/s}^2\) und ist auf der gesamten Erdoberfläche nahezu konstant.</p>
                 </div>
-                <div id="freierFallCalculator1"></div>
-                <div id="freierFallCalculator2"></div>
-                <div id="freierFallCalculator3"></div>
+                <details>
+                    <summary>Formeln</summary>
+                    <div id="freierFallCalculator1"></div>
+                    <div id="freierFallCalculator2"></div>
+                    <div id="freierFallCalculator3"></div>
+                </details>
                 <script>
 
                     function calculateS({ t }) {
@@ -173,9 +202,12 @@
                     <h2><a href="#freierFallAnfangsgeschwindigkeit"># Freier Fall mit Anfangsgeschwindigkeit</a></h2>
                     <p>Der freie Fall mit Anfangsgeschwindigkeit ist eine spezielle Form der beschleunigten Bewegung, bei der ein Körper mit einer Anfangsgeschwindigkeit fällt. Dies bedeutet, dass der Körper nicht nur durch die Schwerkraft, sondern auch durch die Anfangsgeschwindigkeit beeinflusst wird. Ein Beispiel für den freien Fall mit Anfangsgeschwindigkeit ist ein Ball, der von einem Turm geworfen wird. In der Physik wird der freie Fall mit Anfangsgeschwindigkeit oft durch die Formel \(s = v_0 \cdot t + \frac{1}{2} \cdot g \cdot t^2\) beschrieben, wobei \(s\) die zurückgelegte Strecke, \(v_0\) die Anfangsgeschwindigkeit, \(g\) die Erdbeschleunigung und \(t\) die Zeit ist.</p>
                 </div>
-                <div id="freierFallAnfangsgeschwindigkeitCalculator1"></div>
-                <div id="freierFallAnfangsgeschwindigkeitCalculator2"></div>
-                <div id="freierFallAnfangsgeschwindigkeitCalculator3"></div>
+                <details>
+                    <summary>Formeln</summary>
+                    <div id="freierFallAnfangsgeschwindigkeitCalculator1"></div>
+                    <div id="freierFallAnfangsgeschwindigkeitCalculator2"></div>
+                    <div id="freierFallAnfangsgeschwindigkeitCalculator3"></div>
+                </details>
                 <script>
 
                     function calculateS({ v0, t }) {

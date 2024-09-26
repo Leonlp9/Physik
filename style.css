@@ -129,11 +129,46 @@ h1{
     margin: 10px 0;
 }
 
+.simulation > details {
+    border-radius: 5px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.simulation > details > summary {
+    background: #ececec;
+    padding: 10px;
+    border-bottom: 3px solid #a0a0a5;
+    cursor: pointer;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-bottom 0.1s cubic-bezier(0.4, 0, 0.2, 1), margin-bottom 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.simulation > details > summary:hover {
+    background: #d5d5d5;
+}
+
+.simulation > details > summary:after {
+    content: "▼";
+    position: absolute;
+    right: 10px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.simulation > details[open] > summary:after {
+    transform: rotate(180deg);
+}
+
+.simulation > details[open] > summary {
+    background: #d5d5d5;
+}
+
 .button {
     background-color: #d5d5d5;
     color: #2b2b2c;
     border: none;
-    border-bottom: 3px solid #2b2b2c;
+    border-bottom: 3px solid #6a6a71;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -179,19 +214,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
     background: #4a4949;
 }
 
-
-/*function createCheckbox(parent, text, onChange) {
-    const label = document.createElement("label");
-    label.innerText = text;
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.onchange = onChange;
-    label.appendChild(checkbox);
-    parent.appendChild(label);
-}*/
-
-/*Style die checkboxen und label*/
-
 .checkbox-container{
     display: inline-block;
 }
@@ -200,7 +222,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     background: #d5d5d5;
     border-radius: 5px;
     display: inline-block;
-    border-bottom: 3px solid #2b2b2c;
+    border-bottom: 3px solid #6a6a71;
     padding: 10px 20px;
     transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-bottom 0.1s cubic-bezier(0.4, 0, 0.2, 1), margin-bottom 0.1s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 16px;
@@ -240,7 +262,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .calculator summary {
     font-weight: bold;
     cursor: pointer;
-    transition: font-size 0.3s cubic-bezier(0.4, 0, 0.2, 1), font-weight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
 }
 
@@ -254,7 +275,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 /*wenn details offen, dann summary größere font*/
 .calculator details[open] summary {
-    font-size: 31px;
+    font-size: 28px;
     font-weight: normal;
 }
 
