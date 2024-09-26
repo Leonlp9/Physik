@@ -55,18 +55,18 @@ function createCheckbox(parent, text, onChange) {
 
 function createCalculator(title, containerId, formula, formulaText, inputs) {
     const container = document.getElementById(containerId);
+    const details = document.createElement('details');
     const form = document.createElement('form');
     form.className = 'calculator';
 
-    //title
-    const titleElement = document.createElement('h2');
-    titleElement.textContent = title;
-    form.appendChild(titleElement);
+    const summary = document.createElement('summary');
+    summary.innerHTML = `<i class="fas fa-calculator"></i> ${title}`;
+    details.appendChild(summary);
 
     //formular
     const formular = document.createElement('div');
     formular.innerHTML = `\\(${formulaText}\\) <br><br>`;
-    form.appendChild(formular);
+    details.appendChild(formular);
 
     inputs.forEach(input => {
         const label = document.createElement('label');
@@ -76,27 +76,28 @@ function createCalculator(title, containerId, formula, formulaText, inputs) {
         inputField.id = input.id + containerId;
         inputField.value = input.defaultValue || '';
         label.appendChild(inputField);
-        form.appendChild(label);
-        form.appendChild(document.createElement('br'));
+        details.appendChild(label);
+        details.appendChild(document.createElement('br'));
     });
 
     const button = document.createElement('button');
     button.type = 'button';
     button.textContent = 'Calculate';
     button.onclick = calculateResult;
-    form.appendChild(button);
+    details.appendChild(button);
 
     const resultContainer = document.createElement('div');
     resultContainer.id = 'result' + containerId;
     resultContainer.className = 'result';
     resultContainer.innerHTML = 'Result: ';
-    form.appendChild(resultContainer);
+    details.appendChild(resultContainer);
 
     form.onsubmit = (event) => {
         event.preventDefault();
         calculateResult();
     };
 
+    form.appendChild(details);
     container.appendChild(form);
 
     function calculateResult() {

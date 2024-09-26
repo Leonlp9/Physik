@@ -237,6 +237,31 @@ input[type="range"]::-webkit-slider-thumb:hover {
     margin-bottom: 5px;
 }
 
+.calculator summary {
+    font-weight: bold;
+    cursor: pointer;
+    transition: font-size 0.3s cubic-bezier(0.4, 0, 0.2, 1), font-weight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.calculator summary:after {
+    content: "▼";
+    position: absolute;
+    right: -10px;
+    font-size: 18px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/*wenn details offen, dann summary größere font*/
+.calculator details[open] summary {
+    font-size: 31px;
+    font-weight: normal;
+}
+
+.calculator details[open] summary:after {
+    transform: rotate(180deg);
+}
+
 .calculator label {
     display: flex;
     flex-direction: column;

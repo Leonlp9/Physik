@@ -72,7 +72,9 @@
                     <p>Die gleichförmige Bewegung ist eine Bewegung, bei der sich ein Körper mit konstanter Geschwindigkeit in eine Richtung bewegt. Dies bedeutet, dass der Körper in gleichen Zeitabständen gleiche Strecken zurücklegt. Ein Beispiel für eine gleichförmige Bewegung ist ein Auto, das mit einer konstanten Geschwindigkeit auf einer geraden Straße fährt. In der Physik wird die gleichförmige Bewegung oft durch die Formel \(s = v \cdot t\) beschrieben, wobei \(s\) die zurückgelegte Strecke, \(v\) die konstante Geschwindigkeit und \(t\) die Zeit ist.</p>
                 </div>
                 <div id="gleichfoermigeBewegungSimulation"></div>
-                <div id="gleichfoermigeBewegungCalculator"></div>
+                <div id="gleichfoermigeBewegungCalculator1"></div>
+                <div id="gleichfoermigeBewegungCalculator2"></div>
+                <div id="gleichfoermigeBewegungCalculator3"></div>
                 <script>
                     createGleichfoermigeBewegung("gleichfoermigeBewegungSimulation")
 
@@ -80,9 +82,27 @@
                         return v * t;
                     }
 
-                    createCalculator('Berechnung der Strecke in der gleichförmigen Bewegung', 'gleichfoermigeBewegungCalculator', calculateS, 's = v \\cdot t', [
+                    createCalculator('Berechnung der Strecke in der gleichförmigen Bewegung', 'gleichfoermigeBewegungCalculator1', calculateS, 's = v \\cdot t', [
                         { id: 'v', label: 'v (Geschwindigkeit in m/s)' },
                         { id: 't', label: 't (Zeit in s)' }
+                    ]);
+
+                    function calculateV({ s, t }) {
+                        return s / t;
+                    }
+
+                    createCalculator('Berechnung der Geschwindigkeit in der gleichförmigen Bewegung', 'gleichfoermigeBewegungCalculator2', calculateV, 'v = \\frac{s}{t}', [
+                        { id: 's', label: 's (Strecke in m)' },
+                        { id: 't', label: 't (Zeit in s)' }
+                    ]);
+
+                    function calculateT({ s, v }) {
+                        return s / v;
+                    }
+
+                    createCalculator('Berechnung der Zeit in der gleichförmigen Bewegung', 'gleichfoermigeBewegungCalculator3', calculateT, 't = \\frac{s}{v}', [
+                        { id: 's', label: 's (Strecke in m)' },
+                        { id: 'v', label: 'v (Geschwindigkeit in m/s)' }
                     ]);
                 </script>
             </div>
@@ -94,7 +114,7 @@
                     <p>Die beschleunigte Bewegung ist eine Bewegung, bei der sich die Geschwindigkeit eines Körpers ändert. Dies kann entweder eine Zunahme oder eine Abnahme der Geschwindigkeit sein. Ein Beispiel für eine beschleunigte Bewegung ist ein Auto, das von einer Ampel anfährt und dabei immer schneller wird. In der Physik wird die beschleunigte Bewegung oft durch die Formel \(a = \frac{\Delta v}{\Delta t}\) beschrieben, wobei \(a\) die Beschleunigung, \(\Delta v\) die Geschwindigkeitsänderung und \(\Delta t\) die Zeit ist, in der die Änderung stattfindet. Beschleunigte Bewegungen können auch durch Kräfte verursacht werden, wie zum Beispiel die Schwerkraft, die einen fallenden Apfel beschleunigt.</p>
                 </div>
                 <div id="beschleunigteBewegungSimulation"></div>
-                <div id="beschleunigteBewegungCalculator"></div>
+                <div id="beschleunigteBewegungCalculator1"></div>
                 <script>
                     createBeschleunigteBewegung("beschleunigteBewegungSimulation")
 
@@ -102,7 +122,7 @@
                         return deltaV / deltaT;
                     }
 
-                    createCalculator('Berechnung der Beschleunigung in der beschleunigten Bewegung', 'beschleunigteBewegungCalculator', calculateA, 'a = \\frac{\\Delta v}{\\Delta t}', [
+                    createCalculator('Berechnung der Beschleunigung in der beschleunigten Bewegung', 'beschleunigteBewegungCalculator1', calculateA, 'a = \\frac{\\Delta v}{\\Delta t}', [
                         { id: 'deltaV', label: 'Delta v (Geschwindigkeitsänderung in m/s)' },
                         { id: 'deltaT', label: 'Delta t (Zeit in s)' }
                     ]);
@@ -115,14 +135,33 @@
                     <h2><a href="#freierFall"># Freier Fall</a></h2>
                     <p>Der freie Fall ist eine spezielle Form der beschleunigten Bewegung, bei der ein Körper nur durch die Schwerkraft beeinflusst wird. Dies bedeutet, dass der Körper ohne äußere Einflüsse fällt und dabei immer schneller wird. Ein Beispiel für den freien Fall ist ein Apfel, der von einem Baum fällt. In der Physik wird der freie Fall oft durch die Formel \(s = \frac{1}{2} \cdot g \cdot t^2\) beschrieben, wobei \(s\) die zurückgelegte Strecke, \(g\) die Erdbeschleunigung und \(t\) die Zeit ist. Die Erdbeschleunigung beträgt etwa \(9,81 \, \text{m/s}^2\) und ist auf der gesamten Erdoberfläche nahezu konstant.</p>
                 </div>
-                <div id="freierFallCalculator"></div>
+                <div id="freierFallCalculator1"></div>
+                <div id="freierFallCalculator2"></div>
+                <div id="freierFallCalculator3"></div>
                 <script>
 
                     function calculateS({ t }) {
                         return 0.5 * 9.81 * t ** 2;
                     }
 
-                    createCalculator('Berechnung der Strecke im freien Fall', 'freierFallCalculator', calculateS, 's = \\frac{1}{2} \\cdot g \\cdot t^2', [
+                    createCalculator('Berechnung der Strecke im freien Fall', 'freierFallCalculator1', calculateS, 's = \\frac{1}{2} \\cdot g \\cdot t^2', [
+                        { id: 't', label: 't (Zeit in s)' }
+                    ]);
+
+                    function calculateT({ s }) {
+                        return Math.sqrt(2 * s / 9.81);
+                    }
+
+                    createCalculator('Berechnung der Zeit im freien Fall', 'freierFallCalculator2', calculateT, 't = \\sqrt{\\frac{2 \\cdot s}{g}}', [
+                        { id: 's', label: 's (Strecke in m)' }
+                    ]);
+
+                    function calculateS({ g, t }) {
+                        return 0.5 * g * t ** 2;
+                    }
+
+                    createCalculator('Berechnung der Strecke im freien Fall', 'freierFallCalculator3', calculateS, 's = \\frac{1}{2} \\cdot g \\cdot t^2', [
+                        { id: 'g', label: 'g (Erdbeschleunigung in m/s^2)' },
                         { id: 't', label: 't (Zeit in s)' }
                     ]);
                 </script>
@@ -134,16 +173,36 @@
                     <h2><a href="#freierFallAnfangsgeschwindigkeit"># Freier Fall mit Anfangsgeschwindigkeit</a></h2>
                     <p>Der freie Fall mit Anfangsgeschwindigkeit ist eine spezielle Form der beschleunigten Bewegung, bei der ein Körper mit einer Anfangsgeschwindigkeit fällt. Dies bedeutet, dass der Körper nicht nur durch die Schwerkraft, sondern auch durch die Anfangsgeschwindigkeit beeinflusst wird. Ein Beispiel für den freien Fall mit Anfangsgeschwindigkeit ist ein Ball, der von einem Turm geworfen wird. In der Physik wird der freie Fall mit Anfangsgeschwindigkeit oft durch die Formel \(s = v_0 \cdot t + \frac{1}{2} \cdot g \cdot t^2\) beschrieben, wobei \(s\) die zurückgelegte Strecke, \(v_0\) die Anfangsgeschwindigkeit, \(g\) die Erdbeschleunigung und \(t\) die Zeit ist.</p>
                 </div>
-                <div id="freierFallAnfangsgeschwindigkeitCalculator"></div>
+                <div id="freierFallAnfangsgeschwindigkeitCalculator1"></div>
+                <div id="freierFallAnfangsgeschwindigkeitCalculator2"></div>
+                <div id="freierFallAnfangsgeschwindigkeitCalculator3"></div>
                 <script>
 
                     function calculateS({ v0, t }) {
                         return v0 * t + 0.5 * 9.81 * t ** 2;
                     }
 
-                    createCalculator('Berechnung der Strecke im freien Fall mit Anfangsgeschwindigkeit', 'freierFallAnfangsgeschwindigkeitCalculator', calculateS, 's = v_0 \\cdot t + \\frac{1}{2} \\cdot g \\cdot t^2', [
+                    createCalculator('Berechnung der Strecke im freien Fall mit Anfangsgeschwindigkeit', 'freierFallAnfangsgeschwindigkeitCalculator1', calculateS, 's = v_0 \\cdot t + \\frac{1}{2} \\cdot g \\cdot t^2', [
                         { id: 'v0', label: 'v_0 (Anfangsgeschwindigkeit in m/s)' },
                         { id: 't', label: 't (Zeit in s)' }
+                    ]);
+
+                    function calculateV0({ s, t }) {
+                        return (s - 0.5 * 9.81 * t ** 2) / t;
+                    }
+
+                    createCalculator('Berechnung der Anfangsgeschwindigkeit im freien Fall mit Anfangsgeschwindigkeit', 'freierFallAnfangsgeschwindigkeitCalculator2', calculateV0, 'v_0 = \\frac{s - \\frac{1}{2} \\cdot g \\cdot t^2}{t}', [
+                        { id: 's', label: 's (Strecke in m)' },
+                        { id: 't', label: 't (Zeit in s)' }
+                    ]);
+
+                    function calculateT({ s, v0 }) {
+                        return (-v0 + Math.sqrt(v0 ** 2 + 2 * 9.81 * s)) / 9.81;
+                    }
+
+                    createCalculator('Berechnung der Zeit im freien Fall mit Anfangsgeschwindigkeit', 'freierFallAnfangsgeschwindigkeitCalculator3', calculateT, 't = \\frac{-v_0 + \\sqrt{v_0^2 + 2 \\cdot g \\cdot s}}{g}', [
+                        { id: 's', label: 's (Strecke in m)' },
+                        { id: 'v0', label: 'v_0 (Anfangsgeschwindigkeit in m/s)' }
                     ]);
                 </script>
             </div>
