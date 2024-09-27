@@ -22,7 +22,14 @@ function createButton(parent, text, onClick) {
  * @param step Schrittweite
  * @param onChange Funktion, die aufgerufen wird, wenn sich der Wert ändert
  */
-function createSlider(parent, min, max, value, step, onChange) {
+function createSlider(parent, min, max, value, step, onChange, text = false) {
+
+    if (text) {
+        const label = document.createElement("label");
+        label.innerText = text;
+        parent.appendChild(label);
+    }
+
     const slider = document.createElement("input");
     slider.type = "range";
     slider.min = min;
@@ -31,6 +38,8 @@ function createSlider(parent, min, max, value, step, onChange) {
     slider.step = step;
     slider.oninput = onChange;
     parent.appendChild(slider);
+
+    return slider;
 }
 
 function createCheckbox(parent, text, onChange) {

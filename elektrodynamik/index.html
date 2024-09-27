@@ -13,6 +13,23 @@
 
     <script src="https://kit.fontawesome.com/8482ce4752.js" crossorigin="anonymous"></script>
 
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            options: {
+                enableMenu: false
+            },
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            chtml: {
+                scale: 1.3  // Increase font size by 30%
+            }
+        };
+    </script>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <link rel="stylesheet" href="../style.css">
     <script src="../global.js"></script>
     <script src="script.js"></script>
@@ -99,6 +116,10 @@
                 <div class="text">
                     <h2><a href="#elektroskop"># Elektroskop</a></h2>
                     <p>Das <b>Elektroskop</b> ist ein Gerät, das verwendet wird, um elektrische Ladungen zu detektieren. Es besteht aus einem Metallstab, der an einem isolierenden Stab befestigt ist. Wenn eine elektrische Ladung an den Metallstab angelegt wird, werden die Elektronen im Metall abgestoßen und bewegen sich in den isolierenden Stab. Dies führt zu einer Ladungstrennung und erzeugt ein Dipolmoment, das die Elektronen im Metall abstößt und das Elektroskop zum Ausschlagen bringt.</p>
+<!--                    Auch beim annähern eines geladenen Stabes an das Elektroskop wird das Elektroskop ausschlagen-->
+                    <p>Das Elektroskop kann auch durch Annäherung eines geladenen Stabes zum Ausschlagen gebracht werden. Die Elektronen im Metallstab werden durch die elektrische Ladung des Stabes angezogen und bewegen sich in den isolierenden Stab, wodurch das Elektroskop ausschlägt.</p>
+
+                    <p>Im folgenden Experiment können Sie sehen, wie sich das Elektroskop verhält, wenn eine elektrische Ladung an den Metallstab angelegt wird. Bewegen Sie die Maus über den geladenen Stab, um das Elektroskop auszuschlagen.</p>
                 </div>
                 <div id="elektroskopSimulation"></div>
                 <script>createElectroscope("elektroskopSimulation");</script>

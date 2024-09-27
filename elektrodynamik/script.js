@@ -787,7 +787,19 @@ function createElectroscope(elementId) {
     canvas.style.width = "100%";
     animation.appendChild(canvas);
 
+    let interval = null;
     let mausLadung = 0, gespeicherteLadung = 0, ladung = 0, mausX = -100, mausY = -100;
+
+    createButton(animation, "Start", function() {
+        if (interval) {
+            clearInterval(interval);
+            interval = null;
+            this.innerText = "Start";
+        } else {
+            interval = setInterval(frame, 1000 / 60);
+            this.innerText = "Stop";
+        }
+    });
 
     canvas.addEventListener("mousemove", event => {
         const rect = canvas.getBoundingClientRect();
@@ -859,5 +871,5 @@ function createElectroscope(elementId) {
         updateElectroscopeCharge(distance);
     }
 
-    setInterval(frame, 1000 / 60);
+    frame();
 }

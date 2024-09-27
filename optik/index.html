@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Physik</title>
+
+    <!--    jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!--    bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/8482ce4752.js" crossorigin="anonymous"></script>
+
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            options: {
+                enableMenu: false
+            },
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            chtml: {
+                scale: 1.3  // Increase font size by 30%
+            }
+        };
+    </script>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="../style.css">
+    <script src="../global.js"></script>
+    <script src="script.js"></script>
+
+    <!-- meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Physik Simulationen">
+    <meta name="keywords" content="Physik, Simulationen, Schule, Lernen">
+    <meta name="author" content="Leon Rabe">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <meta name="language" content="de">
+
+    <!--   og link-->
+    <meta property="og:title" content="Physik Simulationen">
+    <meta property="og:description" content="Physik Simulationen">
+    <meta property="og:image" content="https://leonlp9.github.io/Physik/preview.png">
+    <meta property="og:url" content="https://leonlp9.github.io/Physik/">
+    <meta property="og:type" content="website">
+
+</head>
+<header></header>
+<body>
+<div class="container">
+
+    <div class="breadcrumb">
+        <a href="../index.html"> Startseite</a> > <a href="index.html">Optik</a>
+    </div>
+
+    <div class="header">
+        <h1>Optik</h1>
+        Die Optik beschäftigt sich mit dem Licht und dessen Ausbreitung, Reflexion, Brechung und Beugung.
+    </div>
+
+    <div class="content">
+
+        <!--    Additive Farbmischung-->
+        <div id="additiveFarbmischung" class="simulation">
+            <div id="additiveFarbmischungSimulation" class="right"></div>
+            <div class="text">
+                <h2><a href="#additiveFarbmischung"># Additive Farbmischung</a></h2>
+                <p>Bei der <u>additiven Farbmischung</u> werden Farben durch das Mischen von <b>Lichtfarben</b> erzeugt. Die Grundfarben in diesem System sind <b>Rot</b>, <b>Grün</b> und <b>Blau</b> (RGB). Durch das Variieren der Intensität dieser drei Farben können alle anderen Farben dargestellt werden:
+                    <br><br>
+                    - <b>Rot</b> und <b>Grün</b> ergeben <u>Gelb</u>.<br>
+                    - <b>Grün</b> und <b>Blau</b> erzeugen <u>Cyan</u>.<br>
+                    - <b>Blau</b> und <b>Rot</b> führen zu <u>Magenta</u>.<br>
+                    - Wenn alle drei Farben mit voller Intensität gemischt werden, entsteht <u>Weiß</u>.
+                    <br><br>
+                    Durch dieses Prinzip wird die additive Farbmischung oft in <b>digitalen Bildschirmen</b> und <b>Projektoren</b> verwendet, um das gesamte sichtbare Farbspektrum darzustellen.
+                </p>
+            </div>
+            <script>
+                createAdditiveFarbmischungSimulation("additiveFarbmischungSimulation");
+            </script>
+        </div>
+    </div>
+</div>
+</body>
+<footer></footer>
+<script>
+    setHeaderContent();
+    setFooterContent();
+</script>
+</html>
