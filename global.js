@@ -23,9 +23,9 @@ function createButton(parent, text, onClick) {
  * @param onChange Funktion, die aufgerufen wird, wenn sich der Wert ändert
  */
 function createSlider(parent, min, max, value, step, onChange, text = false) {
-
+    let label;
     if (text) {
-        const label = document.createElement("label");
+        label = document.createElement("label");
         label.innerText = text;
         parent.appendChild(label);
     }
@@ -36,7 +36,9 @@ function createSlider(parent, min, max, value, step, onChange, text = false) {
     slider.max = max;
     slider.value = value;
     slider.step = step;
+
     slider.oninput = onChange;
+
     parent.appendChild(slider);
 
     return slider;
