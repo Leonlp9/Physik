@@ -873,3 +873,109 @@ function createElectroscope(elementId) {
 
     frame();
 }
+
+
+function createOhmsLaw(elementId) {
+    const element = document.getElementById(elementId);
+    const animation = document.createElement("div");
+    animation.classList.add("animation");
+    element.appendChild(animation);
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 400;
+    canvas.height = 300;
+    canvas.style.width = "100%";
+    animation.appendChild(canvas);
+
+    //slider for voltage, resistance and current
+    let a = createSlider(animation, 0.25, 10, 0, 0.25, function () {
+        frame();
+    }, "R (Widerstand in Ohm)");
+
+
+    function frame() {
+        //clear canvas
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        //Koordinatensystem
+        ctx.beginPath();
+        ctx.moveTo(50, 250);
+        ctx.lineTo(350, 250);
+        ctx.moveTo(50, 250);
+        ctx.lineTo(50, 50);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        //gridlines
+        ctx.beginPath();
+        ctx.strokeStyle = "lightgrey";
+        ctx.lineWidth = 1;
+        for (let i = 1; i < 11; i++) {
+            ctx.moveTo(50 + i * 30, 250);
+            ctx.lineTo(50 + i * 30, 50);
+        }
+        for (let i = 1; i < 11; i++) {
+            ctx.moveTo(50, 250 - i * 20);
+            ctx.lineTo(350, 250 - i * 20);
+        }
+        ctx.stroke();
+
+        //Werte
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("0", 50, 270);
+        ctx.fillText("0", 35, 245);
+
+        ctx.fillText("5", 200, 270);
+        ctx.fillText("10", 350, 270);
+
+        ctx.fillText("1", 35, 50);
+        ctx.fillText("0.5", 30, 150);
+
+        ctx.fillText("A", 65, 50);
+        ctx.fillText("V", 350, 240);
+
+        //Show Ohm value
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(`${a.value} Ω`, 200, 150);
+
+        //pfeile an den achsen
+        ctx.beginPath();
+        ctx.moveTo(45, 55);
+        ctx.lineTo(50, 50);
+        ctx.lineTo(55, 55);
+        ctx.moveTo(345, 245);
+        ctx.lineTo(350, 250);
+        ctx.lineTo(345, 255);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+
+        //Kennlinie
+        ctx.beginPath();
+        ctx.moveTo(50, 250);
+
+        //U = R * I
+        let R = a.value;
+        let I = 10 / R;
+        let U = R * I;
+
+        ctx.lineTo(50 + U * 30, 250 - I * 20);
+
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+    }
+
+    frame();
+
+}

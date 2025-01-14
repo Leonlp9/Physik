@@ -129,13 +129,15 @@ h1{
     margin: 10px 0;
 }
 
-.simulation > details {
+.simulation > details, .text > details {
     border-radius: 5px;
     margin: 10px 0;
     font-weight: bold;
+    display: inline-block;
+    width: 100%;
 }
 
-.simulation > details > summary {
+.simulation > details > summary, .text > details > summary {
     background: #ececec;
     padding: 10px;
     border-bottom: 3px solid #a0a0a5;
@@ -143,6 +145,9 @@ h1{
     transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-bottom 0.1s cubic-bezier(0.4, 0, 0.2, 1), margin-bottom 0.1s cubic-bezier(0.4, 0, 0.2, 1);
     margin-bottom: 10px;
     border-radius: 5px;
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .simulation > details > summary:hover {
