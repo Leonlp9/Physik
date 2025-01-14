@@ -933,8 +933,8 @@ function createOhmsLaw(elementId) {
         ctx.fillText("5", 200, 270);
         ctx.fillText("10", 350, 270);
 
-        ctx.fillText("1", 35, 50);
-        ctx.fillText("0.5", 30, 150);
+        ctx.fillText("10", 30, 50);
+        ctx.fillText("5", 35, 150);
 
         ctx.fillText("A", 65, 50);
         ctx.fillText("V", 350, 240);
